@@ -14,7 +14,7 @@ st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", m
 
 
 # Set page title
-st.header("Submit Your Favorite Bridge!")
+st.header("Submit An Image of Your Favorite Bridge!")
 st.caption(f"Summit 2023 - Build Your Bridge to the Snowflake Data Cloud")
  
 # Create the connection to Snowflake
@@ -28,13 +28,18 @@ def create_session():
     else:
         session = st.session_state['snowpark_session']
     return session
+
+ country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661;").collect()
+                    country_codes_df =  pd.DataFrame(country_codes_df)
+                    country_codes_df = country_codes_df["name"]
+ 
  
 col1, col2 = st.columns(2)
 
 with col1:
   country_code = st.selectbox(
         "In what country is this bridge located?",
-        ("US", "UK", "MX")
+        (country_codes_df)
   ) 
 
 with col2:
