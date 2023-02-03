@@ -3,12 +3,12 @@ import pandas as pd
 from snowflake.snowpark.session import Session
 from snowflake.snowpark.functions import col
 import streamlit as st
-import io
-from io import StringIO
-import base64
+#import io
+#from io import StringIO
+#import base64
 import uuid
 import boto3
-import os
+#import os
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
