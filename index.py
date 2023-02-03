@@ -12,6 +12,7 @@ import os
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
+
 # Set page title
 st.header("Submit Your Favorite Bridge!")
 st.caption(f"Summit 2023 - Build Your Bridge to the Snowflake Data Cloud")
@@ -39,24 +40,18 @@ if uploaded_file is not None:
     with st.spinner("Uploading image and creating a metadata row about it..."):
 
         st.write(uploaded_file)
-        #st.write(getattr(uploaded_file, "name"))
         file_to_put = getattr(uploaded_file, "name")
         st.write("'" + file_to_put + "'")
-     
       
         s3 = boto3.client('s3', **st.secrets["s3"])
         bucket = 'uni-bridge-image-uploads'  
         s3.upload_fileobj(uploaded_file, bucket, file_to_put)
    
-        
-        #st.stop()
-        # Call that function ^ 
+        # Create a Snowflake Snowpark Session
         session = create_session()
         
-        # Convert uploaded file to hex - base64 string into hex 
-        #bytes_data_in_hex = uploaded_file.getvalue().hex()
         country_code = 'UK'
-        # Generate new image file name
+        # Generate new image file name to avoid dupes
         file_name = 'img_' + str(uuid.uuid4())
 
                 
