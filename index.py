@@ -3,16 +3,16 @@ import pandas as pd
 from snowflake.snowpark.session import Session
 from snowflake.snowpark.functions import col
 import streamlit as st
-#import io
-#from io import StringIO
+import io
+from io import StringIO
 #import base64
 import uuid
 import boto3
-#import os
+import os
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
-# Set page title, header and links to docs
+# Set page title
 st.header("Submit Your Favorite Bridge!")
 st.caption(f"Summit 2023 - Build Your Bridge to the Snowflake Data Cloud")
  
