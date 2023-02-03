@@ -42,7 +42,6 @@ if uploaded_file is not None:
         #st.write(getattr(uploaded_file, "name"))
         file_to_put = getattr(uploaded_file, "name")
         st.write("'" + file_to_put + "'")
-            
      
       
         s3 = boto3.client('s3', **st.secrets["s3"])
