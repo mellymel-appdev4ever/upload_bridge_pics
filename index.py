@@ -37,12 +37,12 @@ with col1:
         ("US", "UK", "MX"),
         label_visibility=st.session_state.visibility,
         disabled=st.session_state.disabled,
-    ) 
+  ) 
 
 with col2:
-      bridge_name = st.text_input('Movie title', 'Life of Brian')
-      st.write('The current movie title is', title)
-    )   
+   bridge_name = st.text_input('Movie title', 'Life of Brian')
+   st.write('The current movie title is', title)
+   )   
   
    
 uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
