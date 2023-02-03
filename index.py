@@ -38,7 +38,7 @@ with col1:
   ) 
 
 with col2:
-   bridge_name = st.text_input('Movie title', 'Life of Brian')
+   bridge_name = st.text_input('Bridge Name', 'Øresund')
    st.write('The bridge name you entered is:', bridge_name)
       
   
