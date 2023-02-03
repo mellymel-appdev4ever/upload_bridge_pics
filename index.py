@@ -29,6 +29,9 @@ def create_session():
         session = st.session_state['snowpark_session']
     return session
 
+# Open a Snowflake Snowpark Session
+session = create_session()
+   
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
 country_codes_df = country_codes_df["name"]
@@ -61,9 +64,7 @@ if uploaded_file is not None:
         bucket = 'uni-bridge-image-uploads'  
         s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
    
-        # Create a Snowflake Snowpark Session
-        session = create_session()
-        
+       
         country_code = 'UK'
         # Generate new image file name to avoid dupes
         file_name = 'img_' + str(uuid.uuid4())
