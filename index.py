@@ -39,7 +39,7 @@ with col1:
 
 with col2:
    bridge_name = st.text_input('Movie title', 'Life of Brian')
-   st.write('The current movie title is', title)
+   st.write('The bridge name you entered is:', bridge_name)
       
   
    
