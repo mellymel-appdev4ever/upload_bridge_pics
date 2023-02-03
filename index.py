@@ -55,13 +55,13 @@ if uploaded_file is not None:
         
         # Convert uploaded file to hex - base64 string into hex 
         #bytes_data_in_hex = uploaded_file.getvalue().hex()
-        bytes_data_in_hex = 'not really'
+        country_code = 'UK'
         # Generate new image file name
         file_name = 'img_' + str(uuid.uuid4())
 
                 
         # Write image data in Snowflake table
-        df = pd.DataFrame({"UUID_FILE_NAME": [file_name],  "OG_FILE_NAME": [file_to_put], "IMAGE_BYTES": [bytes_data_in_hex]})
+        df = pd.DataFrame({"UUID_FILE_NAME": [file_name],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
         
         #st.stop()
