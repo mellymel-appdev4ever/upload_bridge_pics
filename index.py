@@ -4,11 +4,11 @@ from snowflake.snowpark.session import Session
 from snowflake.snowpark.functions import col
 import streamlit as st
 import io
-from io import StringIO
+#from io import StringIO
 #import base64
 import uuid
 import boto3
-import os
+#import os
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
@@ -29,10 +29,21 @@ def create_session():
         session = st.session_state['snowpark_session']
     return session
  
-   
-#country_code = st.selectbox("In what country is this bridge located?", options, index=0, format_func=special_internal_function
- #                           , key=None, help=None, on_change=None, args=None, kwargs=None
- #                           , *, disabled=False, label_visibility="visible")   
+col1, col2 = st.columns(2)
+
+with col1:
+  country_code = st.selectbox(
+        "In what country is this bridge located?",
+        ("US", "UK", "MX"),
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled,
+    ) 
+
+with col2:
+      bridge_name = st.text_input('Movie title', 'Life of Brian')
+      st.write('The current movie title is', title)
+    )   
+  
    
 uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 if uploaded_file is not None:
