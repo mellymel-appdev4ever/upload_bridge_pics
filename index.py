@@ -14,7 +14,7 @@ st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", m
 
 # Set page title, header and links to docs
 st.header("Submit Your Favorite Bridge!")
-st.caption(f"Of a bridge, or not a bridge")
+st.caption(f"Summit 2023 - Build Your Bridge to the Snowflake Data Cloud")
  
 # Create the connection to Snowflake
 conn = {**st.secrets["snowflake"]}
@@ -27,11 +27,11 @@ def create_session():
     else:
         session = st.session_state['snowpark_session']
     return session
-options = 
+ 
    
-country_code = st.selectbox("In what country is this bridge located?", options, index=0, format_func=special_internal_function
-                            , key=None, help=None, on_change=None, args=None, kwargs=None
-                            , *, disabled=False, label_visibility="visible")   
+#country_code = st.selectbox("In what country is this bridge located?", options, index=0, format_func=special_internal_function
+ #                           , key=None, help=None, on_change=None, args=None, kwargs=None
+ #                           , *, disabled=False, label_visibility="visible")   
    
 uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 if uploaded_file is not None:
