@@ -4,14 +4,17 @@ from snowflake.snowpark.session import Session
 from snowflake.snowpark.functions import col
 import streamlit as st
 import io
-#from io import StringIO
-#import base64
 import uuid
 import boto3
-#import os
+
+def format_func(option):
+    return CHOICES[option]
+
+
+option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
+
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
-
 
 # Set page title
 st.header("Submit An Image of Your Favorite Bridge!")
