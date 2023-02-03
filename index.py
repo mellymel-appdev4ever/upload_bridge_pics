@@ -34,7 +34,7 @@ session = create_session()
    
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
-country_codes_df = country_codes_df["name"]
+country_codes_df = country_codes_df["alpha_code_2digit"]
  
  
 col1, col2 = st.columns(2)
@@ -65,7 +65,7 @@ if uploaded_file is not None:
         s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
    
        
-        country_code = 'UK'
+        country_code = country_codes_df
         # Generate new image file name to avoid dupes
         file_name = 'img_' + str(uuid.uuid4())
 
