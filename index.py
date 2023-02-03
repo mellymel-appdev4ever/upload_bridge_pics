@@ -63,9 +63,7 @@ if uploaded_file is not None:
         s3 = boto3.client('s3', **st.secrets["s3"])
         bucket = 'uni-bridge-image-uploads'  
         s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
-   
-       
-        country_code = country_codes_df
+
         # Generate new image file name to avoid dupes
         file_name = 'img_' + str(uuid.uuid4())
 
