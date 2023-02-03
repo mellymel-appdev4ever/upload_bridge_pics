@@ -30,8 +30,8 @@ def create_session():
     return session
 
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661;").collect()
-                    country_codes_df =  pd.DataFrame(country_codes_df)
-                    country_codes_df = country_codes_df["name"]
+                   country_codes_df =  pd.DataFrame(country_codes_df)
+                   country_codes_df = country_codes_df["name"]
  
  
 col1, col2 = st.columns(2)
