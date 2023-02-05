@@ -11,7 +11,7 @@ def format_func(option):
     return CHOICES[option]
 
 
-option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
+#option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
 
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
