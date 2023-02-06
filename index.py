@@ -39,7 +39,7 @@ with col1:
   country_code = st.selectbox(
         "In what country is this bridge located?",
         country_codes_df,
-        index=60
+        index=59
   ) 
   st.write('The country chosen is: ',country_code)
   
