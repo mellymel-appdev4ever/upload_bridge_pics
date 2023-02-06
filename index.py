@@ -42,7 +42,8 @@ with col1:
         "In what country is this bridge located?",
         country_codes_df
   ) 
-
+  st.write('The country chosen is: ',country_code)
+  
 #CHOICES = country_codes_df
 #option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
 
