@@ -1,4 +1,4 @@
-import json
+#import json
 import pandas as pd
 from snowflake.snowpark.session import Session
 from snowflake.snowpark.functions import col
@@ -11,7 +11,7 @@ def format_func(option):
     return CHOICES[option]
 
 
-#option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
+#
 
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
@@ -45,8 +45,12 @@ col1, col2 = st.columns(2)
 with col1:
   country_code = st.selectbox(
         "In what country is this bridge located?",
-        (country_codes_df)
+        (country_codes_df.keys()),
+        format_func=format_func
   ) 
+
+choices =country_codes_df
+option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
 
 with col2:
    bridge_name = st.text_input('Bridge Name', 'Øresund')
