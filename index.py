@@ -1,9 +1,7 @@
-#import json
 import pandas as pd
 from snowflake.snowpark.session import Session
 from snowflake.snowpark.functions import col
 import streamlit as st
-#import io
 import uuid
 import boto3
 
@@ -40,7 +38,8 @@ col1, col2 = st.columns(2)
 with col1:
   country_code = st.selectbox(
         "In what country is this bridge located?",
-        country_codes_df
+        country_codes_df,
+        index=1
   ) 
   st.write('The country chosen is: ',country_code)
   
