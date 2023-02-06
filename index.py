@@ -7,12 +7,7 @@ import io
 import uuid
 import boto3
 
-def format_func(option):
-    return CHOICES[option]
-
-
-#
-
+#def format_func(option):return CHOICES[option]
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
