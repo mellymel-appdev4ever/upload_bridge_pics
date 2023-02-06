@@ -28,7 +28,7 @@ def create_session():
 # Open a Snowflake Snowpark Session
 session = create_session()
    
-country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661;").collect()
+country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661 order by iso_country_name;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
 #country_codes_df = country_codes_df["alpha_code_2digit"]
  
@@ -39,7 +39,7 @@ with col1:
   country_code = st.selectbox(
         "In what country is this bridge located?",
         country_codes_df,
-        index=56
+        index=72
   ) 
   st.write('The country chosen is: ',country_code)
   
