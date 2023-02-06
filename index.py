@@ -49,7 +49,7 @@ with col1:
         format_func=format_func
   ) 
 
-choices = country_codes_df
+CHOICES = country_codes_df
 option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
 
 with col2:
