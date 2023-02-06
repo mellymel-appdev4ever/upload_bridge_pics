@@ -45,12 +45,12 @@ col1, col2 = st.columns(2)
 with col1:
   country_code = st.selectbox(
         "In what country is this bridge located?",
-        (country_codes_df),
+        country_codes_df,
         format_func=format_func
   ) 
 
-CHOICES = country_codes_df
-option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
+#CHOICES = country_codes_df
+#option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
 
 with col2:
    bridge_name = st.text_input('Bridge Name', 'Øresund')
