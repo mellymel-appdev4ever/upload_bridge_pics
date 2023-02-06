@@ -40,8 +40,7 @@ col1, col2 = st.columns(2)
 with col1:
   country_code = st.selectbox(
         "In what country is this bridge located?",
-        country_codes_df,
-        format_func=format_func
+        country_codes_df
   ) 
 
 #CHOICES = country_codes_df
