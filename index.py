@@ -10,10 +10,6 @@ st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", m
 def format_func(option):
     return country_codes_df[option]
 
-option = st.selectbox("Select option", options=list(country_codes_df.keys()), format_func=format_func)
-st.write(f"You selected option {option} called {format_func(option)}")
-
-
 
 # Set page title
 st.header("Submit An Image of Your Favorite Bridge!")
@@ -38,7 +34,11 @@ country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from 
 country_codes_df =  pd.DataFrame(country_codes_df)
 #country_codes_df = country_codes_df["alpha_code_2digit"]
 #st.write(country_codes_df.columns[1]) 
- 
+option = st.selectbox("Select option", options=list(country_codes_df.keys()), format_func=format_func)
+st.write(f"You selected option {option} called {format_func(option)}")
+
+
+
 col1, col2 = st.columns(2)
 
 with col1:
