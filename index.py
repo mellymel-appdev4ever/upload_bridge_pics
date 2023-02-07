@@ -7,16 +7,6 @@ import boto3
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
-display = ("male", "female")
-
-options = list(range(len(display)))
-
-value = st.selectbox("gender", options, format_func=lambda x: display[x])
-
-st.write(value)
-
-
-
 # Set page title
 st.header("Submit An Image of Your Favorite Bridge!")
 st.caption(f"Summit 2023 - Build Your Bridge to the Snowflake Data Cloud")
@@ -38,12 +28,14 @@ session = create_session()
    
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661 order by iso_country_name;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
-#country_codes_df = country_codes_df["alpha_code_2digit"]
-#st.write(country_codes_df.columns[1]) 
-option = st.selectbox("Select option", country_codes_df, format_func=format_func)
-#option = st.selectbox("Select option", options=list(country_codes_df.keys()), format_func=format_func)
+#option = st.selectbox("Select option", country_codes_df, format_func=format_func)
 st.write(f"You selected option {option} called {format_func(option)}")
 
+display = (country_codes_df.columns[1])
+options = list(range(len(display)))
+value = st.selectbox("Pick a Country", options, format_func=lambda x: display[x])
+
+st.write(value)
 
 
 col1, col2 = st.columns(2)
