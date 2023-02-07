@@ -7,8 +7,14 @@ import boto3
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
-def format_func(option):
-    return country_codes_df[option]
+display = ("male", "female")
+
+options = list(range(len(display)))
+
+value = st.selectbox("gender", options, format_func=lambda x: display[x])
+
+st.write(value)
+
 
 
 # Set page title
