@@ -29,11 +29,13 @@ session = create_session()
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661 order by iso_country_name;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
 #option = st.selectbox("Select option", country_codes_df, format_func=format_func)
-#st.write(f"You selected option {option} called {format_func(option)}")
+#st.write(country_codes_df.iloc[:, 1])
 
-display = (country_codes_df.columns[1])
-options = (country_codes_df.columns[0])
-value = st.selectbox("Pick a Country", options, format_func=lambda x: display[x])
+ 
+
+#display = (country_codes_df.columns[1])
+#options = (country_codes_df.columns[0])
+#value = st.selectbox("Pick a Country", options, format_func=lambda x: display[x])
 
 st.write(value)
 
