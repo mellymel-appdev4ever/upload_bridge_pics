@@ -32,7 +32,7 @@ country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from 
 country_codes_df =  pd.DataFrame(country_codes_df)
 #country_codes_df = country_codes_df["alpha_code_2digit"]
 st.write(country_codes_df.columns[1]) 
-#df[df.columns[2]]
+st.write(country_codes_df.columns[1].value) 
  
 col1, col2 = st.columns(2)
 
