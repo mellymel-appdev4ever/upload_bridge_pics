@@ -34,7 +34,7 @@ country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from 
 country_codes_df =  pd.DataFrame(country_codes_df)
 #country_codes_df = country_codes_df["alpha_code_2digit"]
 #st.write(country_codes_df.columns[1]) 
-option = st.selectbox("Select option", options=country_codes_df.keys(), format_func=format_func)
+option = st.selectbox("Select option", country_codes_df, format_func=format_func)
 #option = st.selectbox("Select option", options=list(country_codes_df.keys()), format_func=format_func)
 st.write(f"You selected option {option} called {format_func(option)}")
 
