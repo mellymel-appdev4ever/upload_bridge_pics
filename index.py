@@ -32,7 +32,7 @@ country_codes_df =  pd.DataFrame(country_codes_df)
 #st.write(f"You selected option {option} called {format_func(option)}")
 
 display = (country_codes_df.columns[1])
-options = list(range(len(display)))
+options = (country_codes_df.columns[2])
 value = st.selectbox("Pick a Country", options, format_func=lambda x: display[x])
 
 st.write(value)
