@@ -5,7 +5,7 @@ import streamlit as st
 import uuid
 import boto3
 
-#def format_func(option):return CHOICES[option]
+#def format_func(option):return country_codes_df[2]
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
@@ -31,7 +31,8 @@ session = create_session()
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661 order by iso_country_name;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
 #country_codes_df = country_codes_df["alpha_code_2digit"]
-st.write(country_codes_df) 
+st.write(country_codes_df.columns[2]) 
+#df[df.columns[2]]
  
 col1, col2 = st.columns(2)
 
