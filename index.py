@@ -5,7 +5,13 @@ import streamlit as st
 import uuid
 import boto3
 
-#def format_func(option):return country_codes_df[1]
+CHOICES = {1: "dataset a", 2: "dataset b", 3: "dataset c"}
+
+def format_func(option):
+    return CHOICES[option]
+
+option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
+st.write(f"You selected option {option} called {format_func(option)}")
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
@@ -32,7 +38,6 @@ country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from 
 country_codes_df =  pd.DataFrame(country_codes_df)
 #country_codes_df = country_codes_df["alpha_code_2digit"]
 st.write(country_codes_df.columns[1]) 
-st.write(country_codes_df.columns[1].values) 
  
 col1, col2 = st.columns(2)
 
