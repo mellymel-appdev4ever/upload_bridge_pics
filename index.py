@@ -58,6 +58,7 @@ if uploaded_file is not None:
         st.write(uploaded_file)
         file_to_put = getattr(uploaded_file, "name")
         st.write("K '" + file_to_put + "'")
+        st.image(uploaded_file)
       
         s3 = boto3.client('s3', **st.secrets["s3"])
         bucket = 'uni-bridge-image-uploads'  
@@ -70,6 +71,7 @@ if uploaded_file is not None:
         # Write image data in Snowflake table
         df = pd.DataFrame({"UUID_FILE_NAME": [file_name],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
+        st.stop()
         
     _, col2, col3, _ = st.columns(4, gap='medium')
     with st.container():
