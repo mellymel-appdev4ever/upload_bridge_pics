@@ -29,8 +29,6 @@ session = create_session()
    
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661 order by iso_country_name;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
-#option = st.selectbox("Select option", country_codes_df, format_func=format_func)
-#st.write(country_codes_df.iloc[:, 0])
 st.write(country_codes_df)
 
 col1, col2 = st.columns(2)
@@ -43,13 +41,11 @@ with col1:
   ) 
   #st.write('The country chosen is: ',country_name)
   country_code=country_codes_df.loc[country_codes_df['ISO_COUNTRY_NAME'] == country_name, 'ALPHA_CODE_2DIGIT'].iloc[0]
-  st.write('The 2-digit ISO code for', country_name,' is: ',country_code)
+  st.write('The 2-digit ISO code for', country_name,' is ',country_code, '.')
   
 with col2:
    bridge_name = st.text_input('Bridge Name', 'Øresund')
    st.write('The bridge name you entered is:', bridge_name)
-      
-  
    
 uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 if uploaded_file is not None:
