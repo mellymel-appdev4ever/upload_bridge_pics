@@ -22,8 +22,7 @@ def create_session():
     else:
         session = st.session_state['snowpark_session']
     return session
-
-def    
+    
    
 # Open a Snowflake Snowpark Session
 session = create_session()
