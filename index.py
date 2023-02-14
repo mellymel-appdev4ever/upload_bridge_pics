@@ -34,7 +34,7 @@ country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from 
 country_codes_df =  pd.DataFrame(country_codes_df)
 #st.write(country_codes_df)
 
-account_locator = st.text_input('Type in Your Snowflake Account Locator', '2-3 Letters followed by 5-6 numbers')
+account_locator = st.text_input('Type in Your Snowflake Account Locator')
 
 col1, col2 = st.columns(2)
 
