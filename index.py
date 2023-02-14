@@ -30,7 +30,7 @@ session = create_session()
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661 order by iso_country_name;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
 #option = st.selectbox("Select option", country_codes_df, format_func=format_func)
-st.write(country_codes_df.iloc[:, 0])
+#st.write(country_codes_df.iloc[:, 0])
 
 bind = (country_codes_df.iloc[:, 1])
 options = (country_codes_df.iloc[:, 0])
@@ -43,16 +43,15 @@ st.write(value)
 col1, col2 = st.columns(2)
 
 with col1:
-  country_code = st.selectbox(
+  country_name = st.selectbox(
         "In what country is this bridge located?",
         country_codes_df,
         index=59
   ) 
-  st.write('The country chosen is: ',country_code)
+  st.write('The country chosen is: ',country_name)
+  country_code=country_codes_df.loc[country_codes_df['iso_country_name'] == country_name, 'alpha_code_2digit']
+  st.write('The 2-digit ISO code for this country is: ',country_code)
   
-#CHOICES = country_codes_df
-#option = st.selectbox("Select option", options=list(CHOICES.keys()), format_func=format_func)
-
 with col2:
    bridge_name = st.text_input('Bridge Name', 'Øresund')
    st.write('The bridge name you entered is:', bridge_name)
