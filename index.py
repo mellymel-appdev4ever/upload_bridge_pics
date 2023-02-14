@@ -71,8 +71,8 @@ if uploaded_file is not None:
         df = pd.DataFrame({"UUID_FILE_NAME": [file_name],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
         
-  _, col2, col3, _ = st.columns(4, gap='medium')
-        with st.container():
+    _, col2, col3, _ = st.columns(4, gap='medium')
+      with st.container():
             with col2:
                 # Display uploaded image
                 st.subheader("Image you uploaded")
