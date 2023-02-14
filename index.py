@@ -55,10 +55,8 @@ if uploaded_file is not None:
 
     with st.spinner("Uploading image and creating a metadata row about it..."):
 
-        st.write(uploaded_file)
-        file_to_put = getattr(uploaded_file, "name")
-        st.write("K '" + file_to_put + "'")
-        st.image(uploaded_file)
+        #st.write(uploaded_file)
+        file_to_put = getattr(uploaded_file, "name")     
       
         s3 = boto3.client('s3', **st.secrets["s3"])
         bucket = 'uni-bridge-image-uploads'  
@@ -71,18 +69,11 @@ if uploaded_file is not None:
         # Write image data in Snowflake table
         df = pd.DataFrame({"UUID_FILE_NAME": [file_name],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
+        
+        st.write("'" + file_to_put + "'")
+        st.image(uploaded_file)
         st.stop()
         
-    _, col2, col3, _ = st.columns(4, gap='medium')
-    with st.container():
-            with col2:
-                # Display uploaded image
-                st.subheader("Image you uploaded")
-                st.image(uploaded_file)
-
-            with col3:
-                # Display predicted label
-                st.subheader("Image Information")
                 
         #st.stop()
   
