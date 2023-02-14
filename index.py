@@ -31,7 +31,7 @@ country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from 
 country_codes_df =  pd.DataFrame(country_codes_df)
 #option = st.selectbox("Select option", country_codes_df, format_func=format_func)
 #st.write(country_codes_df.iloc[:, 0])
-
+st.write(country_codes_df)
 
 col1, col2 = st.columns(2)
 
@@ -42,7 +42,8 @@ with col1:
         index=59
   ) 
   st.write('The country chosen is: ',country_name)
-  country_code=country_codes_df.loc[country_codes_df['iso_country_name'] == country_name, 'alpha_code_2digit']
+  country_code=country_codes_df.loc[country_codes_df['iso_country_name'] == country_name, 'alpha_code_2digit'].iloc[0]
+  #df2=df.loc[df['Fee'] == 30000, 'Courses'].iloc[0]
   st.write('The 2-digit ISO code for this country is: ',country_code)
   
 with col2:
