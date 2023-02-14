@@ -41,10 +41,9 @@ with col1:
         country_codes_df,
         index=59
   ) 
-  st.write('The country chosen is: ',country_name)
+  #st.write('The country chosen is: ',country_name)
   country_code=country_codes_df.loc[country_codes_df['ISO_COUNTRY_NAME'] == country_name, 'ALPHA_CODE_2DIGIT'].iloc[0]
-  #df2=df.loc[df['Fee'] == 30000, 'Courses'].iloc[0]
-  st.write('The 2-digit ISO code for this country is: ',country_code)
+  st.write('The 2-digit ISO code for', country_name,' is: ',country_code)
   
 with col2:
    bridge_name = st.text_input('Bridge Name', 'Øresund')
