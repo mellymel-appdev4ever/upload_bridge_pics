@@ -74,6 +74,7 @@ if uploaded_file is not None:
         session.write_pandas(df, "UPLOADED_IMAGES")
         
         
+        st.write('Thanks for uploading this wonderful image!')
         st.stop()
         
                 
