@@ -68,7 +68,7 @@ if uploaded_file is not None:
         
                 
         # Write image data in Snowflake table
-        df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
+        df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
         
         
