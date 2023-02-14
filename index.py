@@ -75,6 +75,7 @@ if uploaded_file is not None:
         st.write('Thanks for uploading this wonderful image!')
         st.stop()
         
+        uploaded_file = None
                 
         #st.stop()
   
