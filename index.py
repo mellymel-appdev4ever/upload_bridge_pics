@@ -6,6 +6,7 @@ import uuid
 import boto3
 import io
 from io import StringIO
+import base64
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
