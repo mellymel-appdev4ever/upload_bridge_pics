@@ -23,6 +23,8 @@ def create_session():
         session = st.session_state['snowpark_session']
     return session
 
+def    
+   
 # Open a Snowflake Snowpark Session
 session = create_session()
    
@@ -33,28 +35,9 @@ st.write(country_codes_df.iloc[:, 0])
 
 bind = (country_codes_df.iloc[:, 1])
 options = (country_codes_df.iloc[:, 0])
-#value = st.selectbox("Pick a Country", options, format_func=bind)
+value = st.selectbox("Pick a Country", options)
 
-#st.write(value)
-
-city_options = { 
-    5: "Arizona - Chandler - 5",
-    4: "Arizona - Phoenix - 4",
-    3: "New Jersey - Newark -3",
-    2: "Oregon - Portland - 2",
-    1: "Seattle - Washington - 1",
-    }   
-
-city_mode = st.sidebar.radio(
-    label="Choose a city option:",
-    options= (5, 4, 3, 2, 1), 
-    format_func=lambda x: city_options.get(x),
-    )   
-
-st.write(f'You have chosen {city_options.get(city_mode)}'
-        f' with the value {city_mode}.')
-
-
+st.write(value)
 
 
 
