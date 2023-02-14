@@ -72,7 +72,7 @@ if uploaded_file is not None:
         session.write_pandas(df, "UPLOADED_IMAGES")
         
     _, col2, col3, _ = st.columns(4, gap='medium')
-       with st.container():
+    with st.container():
             with col2:
                 # Display uploaded image
                 st.subheader("Image you uploaded")
