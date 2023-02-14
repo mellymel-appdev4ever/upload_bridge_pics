@@ -4,6 +4,8 @@ from snowflake.snowpark.functions import col
 import streamlit as st
 import uuid
 import boto3
+import io
+from io import StringIO
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 
