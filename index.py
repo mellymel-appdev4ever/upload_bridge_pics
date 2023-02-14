@@ -61,7 +61,9 @@ if uploaded_file is not None:
         s3 = boto3.client('s3', **st.secrets["s3"])
         bucket = 'uni-bridge-image-uploads'  
         s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
-
+        st.write("'" + file_to_put + "'")
+        st.image(uploaded_file)
+        
         # Generate new image file name to avoid dupes
         file_name = 'img_' + str(uuid.uuid4())
 
@@ -70,8 +72,7 @@ if uploaded_file is not None:
         df = pd.DataFrame({"UUID_FILE_NAME": [file_name],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
         
-        st.write("'" + file_to_put + "'")
-        st.image(uploaded_file)
+        
         st.stop()
         
                 
