@@ -29,7 +29,7 @@ session = create_session()
    
 country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from intl_db.countries.int_stds_org_3661 order by iso_country_name;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
-st.write(country_codes_df)
+#st.write(country_codes_df)
 
 col1, col2 = st.columns(2)
 
@@ -54,7 +54,7 @@ if uploaded_file is not None:
 
         st.write(uploaded_file)
         file_to_put = getattr(uploaded_file, "name")
-        st.write("'" + file_to_put + "'")
+        st.write("K '" + file_to_put + "'")
       
         s3 = boto3.client('s3', **st.secrets["s3"])
         bucket = 'uni-bridge-image-uploads'  
@@ -68,7 +68,10 @@ if uploaded_file is not None:
         df = pd.DataFrame({"UUID_FILE_NAME": [file_name],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
         
+        st.subheader("Image you uploaded")
+                
+        st.image(uploaded_file)
         #st.stop()
   
-        
+      
               
