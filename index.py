@@ -34,6 +34,8 @@ country_codes_df = session.sql("select iso_country_name, alpha_code_2digit from 
 country_codes_df =  pd.DataFrame(country_codes_df)
 #st.write(country_codes_df)
 
+account_locator = st.text_input('Type in Your Snowflake Account Locator', '2-3 Letters followed by 5-6 numbers')
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -64,13 +66,9 @@ if uploaded_file is not None:
         bucket = 'uni-bridge-image-uploads'  
         s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
         
-        
-        # Generate new image file name to avoid dupes
-        file_name = 'img_' + str(uuid.uuid4())
-
                 
         # Write image data in Snowflake table
-        df = pd.DataFrame({"UUID_FILE_NAME": [file_name],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
+        df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator],  "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
         
         
