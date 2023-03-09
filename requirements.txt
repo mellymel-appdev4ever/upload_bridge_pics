@@ -4,4 +4,4 @@ snowflake-connector-python==2.8.0
 snowflake-snowpark-python==0.12.0
 uuid
 boto3
-botocore==1.13.28
+botocore
