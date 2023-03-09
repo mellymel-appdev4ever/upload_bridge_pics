@@ -79,6 +79,18 @@ if uploaded_file is not None:
         df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
         session.write_pandas(df, "UPLOADED_IMAGES")
         
+        rek = boto3.client('rekognition')
+            response = rek.detect_labels(
+                Image={
+                    'S3Object': {
+                        'Bucket': bucket,
+                        'Name': uploaded_file
+                    }
+                })
+            all_confidences = [label['Confidence'] for label in response['Labels']]
+            all_labels = [label['Name'] for label in response['Labels']]
+            for i in range(0, len(all_labels)):
+                all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
         
         st.write('Thanks for uploading this wonderful image!')
         st.stop()
@@ -86,6 +98,3 @@ if uploaded_file is not None:
         uploaded_file = None
                 
         #st.stop()
-  
-      
-              
