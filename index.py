@@ -18,7 +18,7 @@ st.caption(f"Summit 2023 - Build Your Bridge to the Snowflake Data Cloud")
 s3_client = boto3.client('s3', **st.secrets["s3"])
 bucket = 'uni-bridge-image-uploads'  
 response = s3_client.list_objects_v2(
-    bucket='uni-bridge-image-uploads',
+    Bucket=bucket,
     Prefix='')
 st.write(response) 
  
