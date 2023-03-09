@@ -83,7 +83,7 @@ if uploaded_file is not None:
         rek_response = rek.detect_labels(
               Image={'S3Object':{'Bucket':bucket,'Name':uploaded_file}},
               MaxLabels=10,
-              Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge"]}
+              Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge"]}}
               )                                    
     
         #st.write(rek_response)
