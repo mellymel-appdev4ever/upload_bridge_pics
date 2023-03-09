@@ -15,12 +15,12 @@ st.header("Submit An Image of Your Favorite Bridge!")
 st.caption(f"Summit 2023 - Build Your Bridge to the Snowflake Data Cloud")
  
 #test listing bucket contents
-s3_client = boto3.client('s3', **st.secrets["s3"])
-bucket = 'uni-bridge-image-uploads'  
-response = s3_client.list_objects_v2(
-    Bucket=bucket,
-    Prefix='')
-st.write(response) 
+#s3_client = boto3.client('s3', **st.secrets["s3"])
+#bucket = 'uni-bridge-image-uploads'  
+#response = s3_client.list_objects_v2(
+#    Bucket=bucket,
+#    Prefix='')
+#st.write(response) 
  
 # Create the connection to Snowflake
 conn = {**st.secrets["snowflake"]}
