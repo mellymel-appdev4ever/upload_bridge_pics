@@ -81,7 +81,7 @@ if uploaded_file is not None:
         
         rek = boto3.client('rekognition', region_name='us-west-2')
         rek_response = rek.detect_labels(
-              Image={'S3Object':{'Bucket':bucket,'Name':uploaded_file}},
+              Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
               MaxLabels=10,
               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge"]}}
               )                                    
