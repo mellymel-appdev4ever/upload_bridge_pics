@@ -80,12 +80,11 @@ if uploaded_file is not None:
         session.write_pandas(df, "UPLOADED_IMAGES")
         
         rek = boto3.client('rekognition', region_name='us-west-2')
-        rek_response = rek.detect_labels(Image={'S3Object':{'Bucket':bucket,'Name':uploaded_file}},
-        MaxLabels=10,
-        #Features=["GENERAL_LABELS", "IMAGE_PROPERTIES"],
-        Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge"]}
-        # "ImageProperties": {"MaxDominantColors":10}}
-        )                                    
+        rek_response = rek.detect_labels(
+              Image={'S3Object':{'Bucket':bucket,'Name':uploaded_file}},
+              MaxLabels=10,
+              Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge"]}
+              )                                    
     
         #st.write(rek_response)
         #all_confidences = [label['Confidence'] for label in response['Labels']]
