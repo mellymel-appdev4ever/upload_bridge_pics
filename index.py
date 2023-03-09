@@ -87,7 +87,7 @@ if uploaded_file is not None:
                         'Name': uploaded_file
                     }
                 })
-        st.write(rek_response)
+        #st.write(rek_response)
         #all_confidences = [label['Confidence'] for label in response['Labels']]
         #all_labels = [label['Name'] for label in response['Labels']]
         #for i in range(0, len(all_labels)):
