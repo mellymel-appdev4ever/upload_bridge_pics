@@ -60,7 +60,7 @@ with st.container():
   st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
   uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 
-  stream = io.BytesIO(uploaded_file['Body'].read())
+  stream = io.BytesIO(uploaded_file)
   image = Image.open(stream)
   
   if uploaded_file is not None:
