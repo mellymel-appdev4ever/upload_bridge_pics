@@ -83,11 +83,11 @@ with st.container():
          uploaded_image = Image.open(stream)
          imgWidth, imgHeight = uploaded_image.size
          draw = ImageDraw.Draw(uploaded_image)
-         st.write(imgWidth)
+         #st.write(imgWidth)
 
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
          rek_response = rek.detect_labels(
-               Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
+               Image={'S3Object':{'Bucket':bucket,'Name':uploaded_image}},
                MaxLabels=10,
                Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Dog", "Person", "Boat", "Vehicle", "Cloud"]}}
                )                                    
@@ -106,7 +106,7 @@ with st.container():
                  st.write(" Width: " + str(instance['BoundingBox']['Width']))
                  st.write(" Height: " + str(instance['BoundingBox']['Height']))
                  
-                 box = Detail['BoundingBox']
+                 box = label['BoundingBox']
                  left = imgWidth * box['Left']
                  top = imgHeight * box['Top']
                  width = imgWidth * box['Width']
