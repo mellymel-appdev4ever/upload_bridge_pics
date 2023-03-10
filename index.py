@@ -89,7 +89,24 @@ with st.container():
 
          st.write(rek_response)
          
-         #create fake df
+
+
+         all_names = [label['Name'] for label in rek_response['Labels']]       
+         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
+         all_bounding_boxes = [label['Instances'] for label in rek_response['Labels']]
+         st.write(all_names)
+         st.write(all_bounding_boxes)
+         st.write(all_names)
+         
+         for i in range(0, len(all_labels)):
+                 all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
+
+         st.write(str(all_labels))
+
+         #st.write(rek_response)
+         st.stop()
+
+                  #create fake df
          test_df = pd.DataFrame([['0', 'Person', '97.33','0','5','4','3','2'], ['1', 'Water','98.22222','0','5','4','3','2']],
                    index=['label_0', 'label_1'],
                    columns=['label_index','label_name','confidence','instance','bb_w','bb_h','bb_l','bb_t'])
@@ -105,21 +122,7 @@ with st.container():
          
          df_mine = pd.read_json(new_json, orient ='index')
          st.write(df_mine)
-
          
-         
-         
-         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
-         st.write(all_confidences)
-         all_labels = [label['Name'] for label in rek_response['Labels']]
-         for i in range(0, len(all_labels)):
-                 all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
-
-         st.write(str(all_labels))
-
-         #st.write(rek_response)
-         st.stop()
-
          uploaded_file = None
             
          
