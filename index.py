@@ -64,7 +64,7 @@ uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=F
 
 if uploaded_file is not None:
  if st.button('Upload and Process File'):
-    with st.spinner("Uploading image and creating a metadata row about it..."):
+    with st.spinner("Uploading image, analyzing the contents, and creating a metadata row about it..."):
 
         #st.write(uploaded_file)
         file_to_put = getattr(uploaded_file, "name")     
@@ -84,10 +84,10 @@ if uploaded_file is not None:
         rek_response = rek.detect_labels(
               Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
               MaxLabels=10,
-              Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Dog", "Bagel"]}}
+              Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Cars", "People"]}}
               )                                    
     
-        st.write('The image you loaded has been examined for the presence of Bridges, Beagles and Bagels and found the following probabilities:')
+        st.write('The image you loaded has been examined for the presence of Bridges and other items:')
         
         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
         all_labels = [label['Name'] for label in rek_response['Labels']]
