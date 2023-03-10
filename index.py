@@ -80,9 +80,10 @@ with st.container():
          s3_img_response = s3_img_object.get()
 
          stream = io.BytesIO(s3_img_response['Body'].read())
-         image = Image.open(stream)
-         imgWidth, imgHeight = image.size
-         draw = ImageDraw.Draw(image)
+         uploaded_image = Image.open(stream)
+         imgWidth, imgHeight = uploaded_image.size
+         draw = ImageDraw.Draw(uploaded_image)
+         st.write(imgWidth)
 
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
          rek_response = rek.detect_labels(
