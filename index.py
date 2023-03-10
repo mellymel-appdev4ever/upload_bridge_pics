@@ -86,7 +86,7 @@ if uploaded_file is not None:
               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Beagle", "Bagel"]}}
               )                                    
     
-        st.write(rek_response)
+        #st.write(rek_response)
         #rr_df=pd.read_json(rek_response, orient='index')
         #st.write(rr_df)
         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
@@ -94,7 +94,7 @@ if uploaded_file is not None:
         for i in range(0, len(all_labels)):
                 all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
         
-        st.write(all_labels)
+        st.write(str(all_labels))
         st.stop()
         
         uploaded_file = None
