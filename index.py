@@ -70,7 +70,7 @@ with st.container():
          st.write("File to be Uploaded: " + file_to_put + ".")
          st.image(uploaded_file)
          #stream = io.BytesIO(uploaded_file)
-         stream = open(uploaded_file, "rb")
+         stream = open(file_to_put, "rb")
          image = Image.open(stream)
 
          s3 = boto3.client('s3', **st.secrets["s3"])
