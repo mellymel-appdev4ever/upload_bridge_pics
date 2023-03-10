@@ -77,7 +77,7 @@ with st.container():
          #after loading the file, we'll use it to analyze and draw
          s3_img_connection = boto3.resource('s3')
          s3_img_object = s3_img_connection.Object(bucket, file_to_put)
-         s3_img_response = s3_object.get()
+         s3_img_response = s3_img_object.get()
 
          stream = io.BytesIO(s3_img_response['Body'].read())
          image = Image.open(stream)
