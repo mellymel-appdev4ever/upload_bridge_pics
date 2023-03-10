@@ -60,9 +60,7 @@ with st.container():
   st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
   uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 
-  #stream = io.BytesIO(uploaded_file)
-  image = Image.open(uploaded_file)
-  
+    
   if uploaded_file is not None:
    if st.button('Upload and Process File'):
       with st.spinner("Uploading image, analyzing the contents, and creating a metadata row about it..."):
@@ -71,6 +69,8 @@ with st.container():
          file_to_put = getattr(uploaded_file, "name")     
          st.write("File to be Uploaded: " + file_to_put + ".")
          st.image(uploaded_file)
+         stream = io.BytesIO(uploaded_file)
+         image = Image.open(uploaded_file)
 
          s3 = boto3.client('s3', **st.secrets["s3"])
          bucket = 'uni-bridge-image-uploads'  
