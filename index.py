@@ -73,6 +73,8 @@ with st.container():
          bucket = 'uni-bridge-image-uploads'  
          s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
 
+         imgWidth, imgHeight = file_to_put.size
+         draw = ImageDraw.Draw(file_to_put)
 
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
@@ -98,7 +100,46 @@ with st.container():
                  st.write(" Left: " + str(instance['BoundingBox']['Left']))
                  st.write(" Width: " + str(instance['BoundingBox']['Width']))
                  st.write(" Height: " + str(instance['BoundingBox']['Height']))
-             st.markdown("""---""")       
+                 
+                 box = Detail['BoundingBox']
+                 left = imgWidth * box['Left']
+                 top = imgHeight * box['Top']
+                 width = imgWidth * box['Width']
+                 height = imgHeight * box['Height']
+                 
+                 points = (
+                    (left, top),
+                    (left + width, top),
+                    (left + width, top + height),
+                    (left, top + height),
+                    (left, top)
+                 )
+                 draw.line(points, fill='#00d400', width=2)
+             st.markdown("""---""")  
+             
                   
          st.stop()
         
+
+
+
+
+        print('Left: ' + '{0:.0f}'.format(left))
+        print('Top: ' + '{0:.0f}'.format(top))
+        print('Face Width: ' + "{0:.0f}".format(width))
+        print('Face Height: ' + "{0:.0f}".format(height))
+
+  
+
+        # Alternatively can draw rectangle. However you can't set line width.
+        # draw.rectangle([left,top, left + width, top + height], outline='#00d400')
+
+    image.show()
+
+    return len(response['FaceDetails'])
+
+def main():
+    bucket = "bucket-name"
+    photo = "photo-name"
+    faces_count = show_faces(photo, bucket)
+    print("faces detected: " + str(faces_count))
