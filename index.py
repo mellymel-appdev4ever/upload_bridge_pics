@@ -94,9 +94,11 @@ with st.container():
                    index=['row 1', 'row 2'],
                    columns=['col 1', 'col 2'])
          st.write(test_df)
-         st.stop()
+         
          #convert to json
-         test_df.to_json(orient='split')
+         test_json = test_df.to_json(orient='split')
+         st.write(test_json)
+         st.stop()
          #convert back to json
          new_json = pd.read_json(test_df, orient='split')
          st.write(new_json)
