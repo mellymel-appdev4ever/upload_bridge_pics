@@ -98,7 +98,7 @@ with st.container():
                  st.write(" Left: " + str(instance['BoundingBox']['Left']))
                  st.write(" Width: " + str(instance['BoundingBox']['Width']))
                  st.write(" Height: " + str(instance['BoundingBox']['Height']))
-                 st.markdown("""---""")
+          st.markdown("""---""")       
                   
          st.stop()
         
