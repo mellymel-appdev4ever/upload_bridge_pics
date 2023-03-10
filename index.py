@@ -96,7 +96,7 @@ if uploaded_file is not None:
         
         st.write(str(all_labels))
         
-        st.write(rek_response)
+        #st.write(rek_response)
         st.stop()
         
         uploaded_file = None
