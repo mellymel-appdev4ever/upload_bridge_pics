@@ -62,7 +62,7 @@ with col2:
    
 uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 if uploaded_file is not None:
-
+ st.button('Upload and Process File'):
     with st.spinner("Uploading image and creating a metadata row about it..."):
 
         #st.write(uploaded_file)
