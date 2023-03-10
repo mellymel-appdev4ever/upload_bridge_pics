@@ -87,7 +87,9 @@ with st.container():
 
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
 
+         st.write(rek_response)
          all_confidences = [label['Confidence'] for label in rek_response['Labels']]
+         st.write(all_confidences)
          all_labels = [label['Name'] for label in rek_response['Labels']]
          for i in range(0, len(all_labels)):
                  all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
