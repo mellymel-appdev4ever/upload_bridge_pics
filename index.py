@@ -103,7 +103,7 @@ with st.container():
          new_json = pd.read_json(test_df, orient='split')
          st.write(new_json)
          
-         df2 = pd.read_json(rek_response, orient ='index')
+         df2 = pd.read_json(new_json, orient ='index')
          st.write(df2)
 
          
