@@ -87,10 +87,10 @@ if uploaded_file is not None:
               )                                    
     
         st.write(rek_response)
-        #all_confidences = [label['Confidence'] for label in response['Labels']]
-        #all_labels = [label['Name'] for label in response['Labels']]
-        #for i in range(0, len(all_labels)):
-        #        all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
+        all_confidences = [label['Confidence'] for label in response['Labels']]
+        all_labels = [label['Name'] for label in response['Labels']]
+        for i in range(0, len(all_labels)):
+                all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
         
         st.write('Thanks for uploading this wonderful image!')
         st.stop()
