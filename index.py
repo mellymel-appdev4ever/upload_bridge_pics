@@ -59,6 +59,9 @@ with col1:
 with col2:
    bridge_name = st.text_input('Bridge Name', 'Øresund')
    st.write('The bridge name you entered is:', bridge_name)
+   
+   st.write(##)
+   
 
 with st.container():
   st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
