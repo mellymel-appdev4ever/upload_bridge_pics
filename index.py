@@ -87,9 +87,9 @@ if uploaded_file is not None:
               )                                    
     
         st.write(rek_response)
-        rr_df=pd.read_json(rek_response, orient='index')
-        st.write(rr_df)
-        #all_confidences = [label['Confidence'] for label in response['Labels']]
+        #rr_df=pd.read_json(rek_response, orient='index')
+        #st.write(rr_df)
+        all_confidences = [label['Confidence'] for label in rek_response['Labels']]
         #all_labels = [label['Name'] for label in response['Labels']]
         #for i in range(0, len(all_labels)):
                 #all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
