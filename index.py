@@ -122,7 +122,7 @@ with st.container():
                  draw.line(points, fill='#00d400', width=2)
              st.markdown("""---""")  
          
-         uploaded_image.save('with_lines.jpg')    
+         uploaded_image.save('with_lines.png')    
          
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
@@ -131,16 +131,7 @@ with st.container():
          
          st.stop()
         
-
-
-
-
-        #print('Left: ' + '{0:.0f}'.format(left))
-        #print('Top: ' + '{0:.0f}'.format(top))
-        #print('Face Width: ' + "{0:.0f}".format(width))
-        #print('Face Height: ' + "{0:.0f}".format(height))
-
-  
+ 
 
         # Alternatively can draw rectangle. However you can't set line width.
         # draw.rectangle([left,top, left + width, top + height], outline='#00d400')
