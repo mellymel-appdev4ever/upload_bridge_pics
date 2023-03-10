@@ -87,7 +87,7 @@ if uploaded_file is not None:
               )                                    
     
         st.write(rek_response)
-        rr_df = pd.DataFrame(rek_response)
+        rr_df=pd.read_json(rek_response, orient='index')
         st.write(rr_df)
         #all_confidences = [label['Confidence'] for label in response['Labels']]
         #all_labels = [label['Name'] for label in response['Labels']]
