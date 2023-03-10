@@ -60,7 +60,7 @@ with col2:
    bridge_name = st.text_input('Bridge Name', 'Øresund')
    st.write('The bridge name you entered is:', bridge_name)
 
-with container():
+with st.container():
 st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
 uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 
