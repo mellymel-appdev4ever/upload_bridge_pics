@@ -5,3 +5,4 @@ snowflake-snowpark-python==0.12.0
 uuid
 boto3
 botocore
+PIL
