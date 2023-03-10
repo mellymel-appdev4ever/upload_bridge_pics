@@ -91,7 +91,7 @@ with st.container():
          
          #create fake df
          test_df = pd.DataFrame([['0', 'Person', '97.33','0','5','4','3','2'], ['1', 'Water','98.22222','0','5','4','3','2']],
-                   index=['label_0', 'label_1],
+                   index=['label_0', 'label_1'],
                    columns=['label_index','label_name','confidence','instance','bb_w','bb_h','bb_l','bb_t'])
          st.write(test_df)
          
