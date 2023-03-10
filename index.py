@@ -88,8 +88,16 @@ with st.container():
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
 
          st.write(rek_response)
-         df2 = pd.read_json(rek_response, orient ='split')
-         st.write(df2)
+         
+         df.to_json(orient='split')
+         '{"columns":["col 1","col 2"],
+          "index":["row 1","row 2"],
+          "data":[["a","b"],["c","d"]]}'
+         pd.read_json(_, orient='split')
+  
+         
+         #df2 = pd.read_json(rek_response, orient ='split')
+         #st.write(df2)
 
          
          
