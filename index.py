@@ -106,7 +106,7 @@ with st.container():
                  st.write(" Width: " + str(instance['BoundingBox']['Width']))
                  st.write(" Height: " + str(instance['BoundingBox']['Height']))
                  
-                 box = label['BoundingBox']
+                 box = instance['BoundingBox']
                  left = imgWidth * box['Left']
                  top = imgHeight * box['Top']
                  width = imgWidth * box['Width']
