@@ -75,7 +75,7 @@ with st.container():
          s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
 
          #after loading the file, we'll use it to analyze and draw
-         s3_img_connection = boto3.resource('s3')
+         s3_img_connection = boto3.resource('s3', **st.secrets["s3"])
          s3_img_object = s3_img_connection.Object(bucket, file_to_put)
          s3_img_response = s3_img_object.get()
 
