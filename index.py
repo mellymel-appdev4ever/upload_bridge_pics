@@ -89,12 +89,13 @@ with st.container():
 
          st.write(rek_response)
          
-         df.to_json(orient='split')
-         '{"columns":["col 1","col 2"],
-          "index":["row 1","row 2"],
-          "data":[["a","b"],["c","d"]]}'
+         test_df = pd.DataFrame([['a', 'b'], ['c', 'd']],
+                  index=['row 1', 'row 2'],
+                  columns=['col 1', 'col 2'])
+         
+         test_df.to_json(orient='split')
          pd.read_json(_, orient='split')
-  
+         st.write(test_df)
          
          #df2 = pd.read_json(rek_response, orient ='split')
          #st.write(df2)
