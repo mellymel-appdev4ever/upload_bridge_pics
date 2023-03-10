@@ -99,7 +99,7 @@ with st.container():
          for i in range(0, len(all_labels)):
                  all_labels[i]=all_names[i]+": "+str(all_confidences[i])+"%"  
                  labels_df = pd.DataFrame([all_names[i], all_confidences[i],'0','5','4','3','2'],
-                           index=['label_0', 'label_1', 'label_2],             
+                           index=['label_0', 'label_1', 'label_2'],             
                            columns=['label_name','confidence','instance','bb_w','bb_h','bb_l','bb_t'])
 
          st.write(str(labels_df))
