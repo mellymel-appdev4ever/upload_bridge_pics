@@ -87,14 +87,15 @@ if uploaded_file is not None:
               )                                    
     
         st.write('The image you loaded has been examined for the presence of Bridges, Beagles and Bagels and found the following probabilities:')
-        #rr_df=pd.read_json(rek_response, orient='index')
-        #st.write(rr_df)
+        
         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
         all_labels = [label['Name'] for label in rek_response['Labels']]
         for i in range(0, len(all_labels)):
-                all_labels[i]=all_labels[i]+": "+str(int(all_confidences[i]))+"%"         
+                all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
         
         st.write(str(all_labels))
+        
+        st.write(rek_response)
         st.stop()
         
         uploaded_file = None
