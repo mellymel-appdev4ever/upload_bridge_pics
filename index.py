@@ -60,6 +60,9 @@ with st.container():
   st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
   uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 
+  stream = io.BytesIO(uploaded_file['Body'].read())
+  image = Image.open(stream)
+  
   if uploaded_file is not None:
    if st.button('Upload and Process File'):
       with st.spinner("Uploading image, analyzing the contents, and creating a metadata row about it..."):
@@ -73,8 +76,8 @@ with st.container():
          bucket = 'uni-bridge-image-uploads'  
          s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
 
-         imgWidth, imgHeight = uploaded_file.size
-         draw = ImageDraw.Draw(uploaded_file)
+         imgWidth, imgHeight = image.size
+         draw = ImageDraw.Draw(image)
 
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
