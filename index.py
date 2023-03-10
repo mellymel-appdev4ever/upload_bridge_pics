@@ -121,8 +121,9 @@ with st.container():
                  )
                  draw.line(points, fill='#00d400', width=2)
              st.markdown("""---""")  
-         #uploaded_file.show()    
-         st.image(draw)
+         
+         draw.save('with_lines.jpg')    
+         
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
          session.write_pandas(to_sf_df, "UPLOADED_IMAGES")
