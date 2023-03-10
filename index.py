@@ -55,6 +55,7 @@ with col2:
    
 
 with st.container():
+  st.markdown("""---""")
   st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
   uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 
