@@ -61,47 +61,47 @@ with col2:
    st.write('The bridge name you entered is:', bridge_name)
 
 with st.container():
-st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
-uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
+  st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
+  uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 
-if uploaded_file is not None:
- if st.button('Upload and Process File'):
-    with st.spinner("Uploading image, analyzing the contents, and creating a metadata row about it..."):
+  if uploaded_file is not None:
+   if st.button('Upload and Process File'):
+      with st.spinner("Uploading image, analyzing the contents, and creating a metadata row about it..."):
 
-        #st.write(uploaded_file)
-        file_to_put = getattr(uploaded_file, "name")     
-        st.write("File to be Uploaded: " + file_to_put + ".")
-        st.image(uploaded_file)
-      
-        s3 = boto3.client('s3', **st.secrets["s3"])
-        bucket = 'uni-bridge-image-uploads'  
-        s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
-        
-                
-        # Write image data in Snowflake table
-        df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
-        session.write_pandas(df, "UPLOADED_IMAGES")
-        
-        rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
-        rek_response = rek.detect_labels(
-              Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
-              MaxLabels=10,
-              Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Car", "Person", "Airplane", "Truck", "Cloud"]}}
-              )                                    
-    
-        st.write('The image you loaded has been examined for the presence of bridges and other items:')
-        
-        all_confidences = [label['Confidence'] for label in rek_response['Labels']]
-        all_labels = [label['Name'] for label in rek_response['Labels']]
-        for i in range(0, len(all_labels)):
-                all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
-        
-        st.write(str(all_labels))
-        
-        #st.write(rek_response)
-        st.stop()
-        
-        uploaded_file = None
+         #st.write(uploaded_file)
+         file_to_put = getattr(uploaded_file, "name")     
+         st.write("File to be Uploaded: " + file_to_put + ".")
+         st.image(uploaded_file)
+
+         s3 = boto3.client('s3', **st.secrets["s3"])
+         bucket = 'uni-bridge-image-uploads'  
+         s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
+
+
+         # Write image data in Snowflake table
+         df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
+         session.write_pandas(df, "UPLOADED_IMAGES")
+
+         rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
+         rek_response = rek.detect_labels(
+               Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
+               MaxLabels=10,
+               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Car", "Person", "Airplane", "Truck", "Cloud"]}}
+               )                                    
+
+         st.write('The image you loaded has been examined for the presence of bridges and other items:')
+
+         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
+         all_labels = [label['Name'] for label in rek_response['Labels']]
+         for i in range(0, len(all_labels)):
+                 all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
+
+         st.write(str(all_labels))
+
+         #st.write(rek_response)
+         st.stop()
+
+         uploaded_file = None
             
          
         #st.stop()
