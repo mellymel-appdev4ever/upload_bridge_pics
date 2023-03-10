@@ -86,7 +86,7 @@ if uploaded_file is not None:
               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Beagle", "Bagel"]}}
               )                                    
     
-        #st.write(rek_response)
+        st.write('The image you loaded has been examined for the presence of Bridges, Beagles and Bagels and found the following probabilities:')
         #rr_df=pd.read_json(rek_response, orient='index')
         #st.write(rr_df)
         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
