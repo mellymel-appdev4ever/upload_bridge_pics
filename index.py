@@ -89,13 +89,16 @@ with st.container():
 
          st.write(rek_response)
          
+         #create fake df
          test_df = pd.DataFrame([['a', 'b'], ['c', 'd']],
-                  index=['row 1', 'row 2'],
-                  columns=['col 1', 'col 2'])
+                   index=['row 1', 'row 2'],
+                   columns=['col 1', 'col 2'])
          
+         #convert to json
          test_df.to_json(orient='split')
-         pd.read_json(_, orient='split')
-         st.write(test_df)
+         #convert back to json
+         new_json = pd.read_json(test_df, orient='split')
+         st.write(new_json)
          
          #df2 = pd.read_json(rek_response, orient ='split')
          #st.write(df2)
