@@ -116,7 +116,7 @@ with st.container():
                  )
                  draw.line(points, fill='#00d400', width=2)
              st.markdown("""---""")  
-             
+         file_to_put.show()    
                   
          st.stop()
         
@@ -124,17 +124,17 @@ with st.container():
 
 
 
-        print('Left: ' + '{0:.0f}'.format(left))
-        print('Top: ' + '{0:.0f}'.format(top))
-        print('Face Width: ' + "{0:.0f}".format(width))
-        print('Face Height: ' + "{0:.0f}".format(height))
+        #print('Left: ' + '{0:.0f}'.format(left))
+        #print('Top: ' + '{0:.0f}'.format(top))
+        #print('Face Width: ' + "{0:.0f}".format(width))
+        #print('Face Height: ' + "{0:.0f}".format(height))
 
   
 
         # Alternatively can draw rectangle. However you can't set line width.
         # draw.rectangle([left,top, left + width, top + height], outline='#00d400')
 
-    image.show()
+    
 
     return len(response['FaceDetails'])
 
