@@ -88,13 +88,27 @@ with st.container():
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
 
          #st.write(rek_response)
-         all_names = [label['Name'] for label in rek_response['Labels']]       
-         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
-         all_bounding_boxes = [label['Instances'] for label in rek_response['Labels']]
+         #all_names = [label['Name'] for label in rek_response['Labels']]       
+         #all_confidences = [label['Confidence'] for label in rek_response['Labels']]
+         #all_bounding_boxes = [label['Instances'] for label in rek_response['Labels']]
          #all_labels=all_names
-         st.write(all_names)
-         st.write(all_bounding_boxes)
-         st.write(all_confidences)
+         #st.write(all_names)
+         #st.write(all_bounding_boxes)
+         #st.write(all_confidences)
+         
+         for label in rek_response['Labels']:
+             print("Label: " + label['Name'])
+             print("Confidence: " + str(label['Confidence']))
+             print("Instances:")
+
+             for instance in label['Instances']:
+                 st.write(" Bounding box")
+                 st.write(" Top: " + str(instance['BoundingBox']['Top']))
+                 st.write(" Left: " + str(instance['BoundingBox']['Left']))
+                 st.write(" Width: " + str(instance['BoundingBox']['Width']))
+                 st.write(" Height: " + str(instance['BoundingBox']['Height']))
+                 st.write(" Confidence: " + str(instance['Confidence']))  
+         st.stop()
          
          for i in range(0, len(all_names)):
                  #all_labels[i]=all_names[i]+": "+str(all_confidences[i])+"%"  
