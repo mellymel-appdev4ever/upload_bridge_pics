@@ -82,7 +82,7 @@ with st.container():
          rek_response = rek.detect_labels(
                Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
                MaxLabels=10,
-               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Car", "Person", "Airplane", "Truck", "Cloud"]}}
+               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Dog", "Person", "Boat", "Vehicle", "Cloud"]}}
                )                                    
 
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
