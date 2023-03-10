@@ -88,16 +88,9 @@ with st.container():
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
 
          st.write(rek_response)
-         rr_df = pd.DataFrame()
+         df2 = pd.read_json(rek_response, orient ='index')
+         st.write(df2)
 
-         for label in rek_response.findall('Labels'):
-             parent = node.attrib.get('Name')
-             child = node.attrib.get('Confidence')
-
-             col_name = parent
-             val = child
-
-             rr_df[col_name] = [val]
          
          
          
