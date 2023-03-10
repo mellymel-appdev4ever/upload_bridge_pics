@@ -87,7 +87,7 @@ if uploaded_file is not None:
               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Car", "Person", "Airplane", "Truck", "Cloud"]}}
               )                                    
     
-        st.write('The image you loaded has been examined for the presence of Bridges and other items:')
+        st.write('The image you loaded has been examined for the presence of bridges and other items:')
         
         all_confidences = [label['Confidence'] for label in rek_response['Labels']]
         all_labels = [label['Name'] for label in rek_response['Labels']]
