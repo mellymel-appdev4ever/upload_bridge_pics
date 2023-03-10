@@ -80,9 +80,9 @@ with st.container():
          s3_img_response = s3_img_object.get()
 
          stream = io.BytesIO(s3_img_response['Body'].read())
-         uploaded_image = Image.open(stream)
-         imgWidth, imgHeight = uploaded_image.size
-         draw = ImageDraw.Draw(uploaded_image)
+         bb_image = Image.open(stream)
+         imgWidth, imgHeight = bb_image.size
+         draw = ImageDraw.Draw(bb_image)
          #st.write(imgWidth)
 
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
@@ -122,7 +122,7 @@ with st.container():
                  draw.line(points, fill='#00d400', width=2)
              st.markdown("""---""")  
          
-         uploaded_image.save('with_lines.png')    
+         bb_image.save('..\..\with_lines.png')    
          
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
