@@ -86,20 +86,11 @@ with st.container():
                )                                    
 
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
-
-         #st.write(rek_response)
-         #all_names = [label['Name'] for label in rek_response['Labels']]       
-         #all_confidences = [label['Confidence'] for label in rek_response['Labels']]
-         #all_bounding_boxes = [label['Instances'] for label in rek_response['Labels']]
-         #all_labels=all_names
-         #st.write(all_names)
-         #st.write(all_bounding_boxes)
-         #st.write(all_confidences)
-         
+        
          for label in rek_response['Labels']:
-             print("Label: " + label['Name'])
-             print("Confidence: " + str(label['Confidence']))
-             print("Instances:")
+             st.write("Label: " + label['Name'])
+             st.write("Confidence: " + str(label['Confidence']))
+             st.write("Instances:")
 
              for instance in label['Instances']:
                  st.write(" Bounding box")
@@ -107,38 +98,6 @@ with st.container():
                  st.write(" Left: " + str(instance['BoundingBox']['Left']))
                  st.write(" Width: " + str(instance['BoundingBox']['Width']))
                  st.write(" Height: " + str(instance['BoundingBox']['Height']))
-                 st.write(" Confidence: " + str(instance['Confidence']))  
+                  
          st.stop()
-         
-         for i in range(0, len(all_names)):
-                 #all_labels[i]=all_names[i]+": "+str(all_confidences[i])+"%"  
-                 labels_df = pd.DataFrame([all_names[i], all_confidences[i]],
-                           index=['label_0', 'label_1'],             
-                           columns=['label_name','confidence'])
-
-         st.write(str(labels_df))
-
-         #st.write(rek_response)
-         st.stop()
-
-         #create fake df
-         test_df = pd.DataFrame([['0', 'Person', '97.33','0','5','4','3','2'], ['1', 'Water','98.22222','0','5','4','3','2']],
-                   index=['label_0', 'label_1'],
-                   columns=['label_index','label_name','confidence','instance','bb_w','bb_h','bb_l','bb_t'])
-         st.write(test_df)
-         
-         #convert to json
-         test_json = test_df.to_json(orient='split')
-         st.write(test_json)
-         st.stop()
-         #convert back to json
-         new_json = pd.read_json(test_df, orient='split')
-         st.write(new_json)
-         
-         df_mine = pd.read_json(new_json, orient ='index')
-         st.write(df_mine)
-         
-         uploaded_file = None
-            
-         
-        #st.stop()
+        
