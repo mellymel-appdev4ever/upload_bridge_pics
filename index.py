@@ -136,10 +136,6 @@ with st.container():
 
     
 
-    return len(response['FaceDetails'])
+    #return len(response['FaceDetails'])
 
-def main():
-    bucket = "bucket-name"
-    photo = "photo-name"
-    faces_count = show_faces(photo, bucket)
-    print("faces detected: " + str(faces_count))
+
