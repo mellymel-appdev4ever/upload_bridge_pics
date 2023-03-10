@@ -69,20 +69,20 @@ with st.container():
          file_to_put = getattr(uploaded_file, "name")     
          st.write("File to be Uploaded: " + file_to_put + ".")
          st.image(uploaded_file)
-         #stream = io.BytesIO(uploaded_file)
-         stream = open(file_to_put, "rb")
-         image = Image.open(stream)
 
          s3 = boto3.client('s3', **st.secrets["s3"])
          bucket = 'uni-bridge-image-uploads'  
          s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
 
+         #after loading the file, we'll use it to analyze and draw
+         s3_img_connection = boto3.resource('s3')
+         s3_img_object = s3_img_connection.Object(bucket, file_to_put)
+         s3_img_response = s3_object.get()
+
+         stream = io.BytesIO(s3_img_response['Body'].read())
+         image = Image.open(stream)
          imgWidth, imgHeight = image.size
          draw = ImageDraw.Draw(image)
-
-         # Write image data in Snowflake table
-         to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
-         session.write_pandas(to_sf_df, "UPLOADED_IMAGES")
 
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
          rek_response = rek.detect_labels(
@@ -121,7 +121,12 @@ with st.container():
                  draw.line(points, fill='#00d400', width=2)
              st.markdown("""---""")  
          uploaded_file.show()    
-                  
+         
+         # Write image data in Snowflake table
+         to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
+         session.write_pandas(to_sf_df, "UPLOADED_IMAGES")
+         
+         
          st.stop()
         
 
