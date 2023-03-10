@@ -84,7 +84,7 @@ if uploaded_file is not None:
         rek_response = rek.detect_labels(
               Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
               MaxLabels=10,
-              Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Cars", "People"]}}
+              Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Car", "Person"]}}
               )                                    
     
         st.write('The image you loaded has been examined for the presence of Bridges and other items:')
