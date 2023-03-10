@@ -75,8 +75,8 @@ with st.container():
 
 
          # Write image data in Snowflake table
-         df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
-         session.write_pandas(df, "UPLOADED_IMAGES")
+         to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
+         session.write_pandas(to_sf_df, "UPLOADED_IMAGES")
 
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
          rek_response = rek.detect_labels(
@@ -87,26 +87,25 @@ with st.container():
 
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
 
-         st.write(rek_response)
-         
-
-
+         #st.write(rek_response)
          all_names = [label['Name'] for label in rek_response['Labels']]       
          all_confidences = [label['Confidence'] for label in rek_response['Labels']]
          all_bounding_boxes = [label['Instances'] for label in rek_response['Labels']]
          st.write(all_names)
          st.write(all_bounding_boxes)
-         st.write(all_names)
+         st.write(all_confidences)
          
          for i in range(0, len(all_labels)):
-                 all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
+                 all_labels[i]=all_names[i]+": "+str(all_confidences[i])+"%"  
+                 labels_df = pd.DataFrame([index, all_names[i], all_confidences[i],'0','5','4','3','2']
+                           columns=['index','label_name','confidence','instance','bb_w','bb_h','bb_l','bb_t'])
 
-         st.write(str(all_labels))
+         st.write(str(labels_df))
 
          #st.write(rek_response)
          st.stop()
 
-                  #create fake df
+         #create fake df
          test_df = pd.DataFrame([['0', 'Person', '97.33','0','5','4','3','2'], ['1', 'Water','98.22222','0','5','4','3','2']],
                    index=['label_0', 'label_1'],
                    columns=['label_index','label_name','confidence','instance','bb_w','bb_h','bb_l','bb_t'])
