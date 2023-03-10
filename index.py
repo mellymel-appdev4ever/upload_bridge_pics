@@ -87,7 +87,7 @@ with st.container():
 
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
          rek_response = rek.detect_labels(
-               Image={'S3Object':{'Bucket':bucket,'Name':uploaded_image}},
+               Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
                MaxLabels=10,
                Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Dog", "Person", "Boat", "Vehicle", "Cloud"]}}
                )                                    
