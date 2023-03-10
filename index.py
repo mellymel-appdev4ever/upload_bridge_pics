@@ -88,7 +88,7 @@ with st.container():
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
 
          st.write(rek_response)
-         df2 = pd.read_json(rek_response, orient ='index')
+         df2 = pd.read_json(str(rek_response), orient ='index')
          st.write(df2)
 
          
