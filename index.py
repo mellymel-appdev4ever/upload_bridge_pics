@@ -91,13 +91,13 @@ with st.container():
          all_names = [label['Name'] for label in rek_response['Labels']]       
          all_confidences = [label['Confidence'] for label in rek_response['Labels']]
          all_bounding_boxes = [label['Instances'] for label in rek_response['Labels']]
-         all_labels=all_names
+         #all_labels=all_names
          st.write(all_names)
          st.write(all_bounding_boxes)
          st.write(all_confidences)
          
-         for i in range(0, len(all_labels)):
-                 all_labels[i]=all_names[i]+": "+str(all_confidences[i])+"%"  
+         for i in range(0, len(all_names)):
+                 #all_labels[i]=all_names[i]+": "+str(all_confidences[i])+"%"  
                  labels_df = pd.DataFrame([all_names[i], all_confidences[i]],
                            index=['label_0', 'label_1', 'label_2'],             
                            columns=['label_name','confidence'])
