@@ -88,9 +88,9 @@ with st.container():
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
         
          for label in rek_response['Labels']:
-             st.write("Label: " + label['Name'])
+             st.write("Item Found: " + label['Name'])
              st.write("Confidence: " + str(label['Confidence']))
-             st.write("Instances:")
+             
 
              for instance in label['Instances']:
                  st.write(" Bounding box")
@@ -98,6 +98,7 @@ with st.container():
                  st.write(" Left: " + str(instance['BoundingBox']['Left']))
                  st.write(" Width: " + str(instance['BoundingBox']['Width']))
                  st.write(" Height: " + str(instance['BoundingBox']['Height']))
+                 st.markdown("""---""")
                   
          st.stop()
         
