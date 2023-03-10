@@ -91,6 +91,7 @@ with st.container():
          all_names = [label['Name'] for label in rek_response['Labels']]       
          all_confidences = [label['Confidence'] for label in rek_response['Labels']]
          all_bounding_boxes = [label['Instances'] for label in rek_response['Labels']]
+         all_labels=all_names
          st.write(all_names)
          st.write(all_bounding_boxes)
          st.write(all_confidences)
