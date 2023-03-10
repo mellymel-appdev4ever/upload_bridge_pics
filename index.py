@@ -73,8 +73,8 @@ with st.container():
          bucket = 'uni-bridge-image-uploads'  
          s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
 
-         imgWidth, imgHeight = file_to_put.size
-         draw = ImageDraw.Draw(file_to_put)
+         imgWidth, imgHeight = uploaded_file.size
+         draw = ImageDraw.Draw(uploaded_file)
 
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
@@ -116,7 +116,7 @@ with st.container():
                  )
                  draw.line(points, fill='#00d400', width=2)
              st.markdown("""---""")  
-         file_to_put.show()    
+         uploaded_file.show()    
                   
          st.stop()
         
