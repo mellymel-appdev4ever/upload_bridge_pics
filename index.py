@@ -7,6 +7,7 @@ import boto3
 import io
 from io import StringIO
 import base64
+from PIL import Image, ImageDraw
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 uploaded_file = None
