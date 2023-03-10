@@ -94,7 +94,7 @@ if uploaded_file is not None:
         for i in range(0, len(all_labels)):
                 all_labels[i]=all_labels[i]+": "+str(all_confidences[i])+"%"         
         
-        st.write('Thanks for uploading this wonderful image!')
+        st.write(all_labels)
         st.stop()
         
         uploaded_file = None
