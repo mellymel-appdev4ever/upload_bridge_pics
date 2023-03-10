@@ -89,7 +89,7 @@ with st.container():
                Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Car", "Person", "Airplane", "Truck", "Cloud"]}}
                )                                    
 
-         st.write('The image you loaded has been examined for the presence of bridges and other items:')
+         st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
 
          all_confidences = [label['Confidence'] for label in rek_response['Labels']]
          all_labels = [label['Name'] for label in rek_response['Labels']]
