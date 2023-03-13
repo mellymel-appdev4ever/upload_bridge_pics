@@ -7,7 +7,7 @@ import boto3
 import io
 from io import StringIO
 import base64
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 #set font for annotation of images
 fontsize = 40
