@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 #set font for annotation of images
 fontsize = 40
-bb_font = ImageFont.truetype('Arial', fontsize)
+bb_font = ImageFont.truetype("arial.ttf", fontsize)
 
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 uploaded_file = None
