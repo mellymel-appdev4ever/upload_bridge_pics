@@ -120,7 +120,7 @@ with st.container():
                     (left, top)
                  )
                  annotated_img.line(points, fill='#00c6d4', width=2)
-                 annotated_img.text((top, left), name, fill=('#00c6d4'))
+                 annotated_img.text((top, left), label['Name'], fill=('#00c6d4'))
              st.markdown("""---""")  
          
          st.image(bb_image)
@@ -131,16 +131,7 @@ with st.container():
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
          session.write_pandas(to_sf_df, "UPLOADED_IMAGES")
          
-         
          st.stop()
-        
- 
 
-        # Alternatively can draw rectangle. However you can't set line width.
-        # draw.rectangle([left,top, left + width, top + height], outline='#00d400')
-
-    
-
-    #return len(response['FaceDetails'])
 
 
