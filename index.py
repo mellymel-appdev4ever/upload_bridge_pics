@@ -96,8 +96,6 @@ with st.container():
          for label in rek_response['Labels']:
              st.write("Item Found: " + label['Name'])
              st.write("Confidence: " + str(label['Confidence']))
-             
-             bb_label = label['Name']+":"+str(label['Confidence'])[:4]+"% Confidence Level"
 
              for instance in label['Instances']:
                  box = instance['BoundingBox']
@@ -114,6 +112,7 @@ with st.container():
                     (left, top)
                  )
                  annotated_img.line(points, fill='#00c6d4', width=2)
+                 bb_label = label['Name']+":"+str(label['Confidence'])[:4]+"% Conf"
                  annotated_img.text((left, top), bb_label, fill=('#ffffff'))
              st.markdown("""---""")  
          
