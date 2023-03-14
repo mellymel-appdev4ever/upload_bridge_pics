@@ -68,7 +68,7 @@ with st.container():
          #st.write(uploaded_file)
          file_to_put = getattr(uploaded_file, "name")     
          st.write("File to be Uploaded: " + file_to_put + ".")
-         st.image(uploaded_file)
+         #st.image(uploaded_file)
 
          s3 = boto3.client('s3', **st.secrets["s3"])
          bucket = 'uni-bridge-image-uploads'  
@@ -98,13 +98,14 @@ with st.container():
              st.write("Item Found: " + label['Name'])
              st.write("Confidence: " + str(label['Confidence']))
              
+             bb_label = label['Name']+':'+ str(label['Confidence']+'% Confidence Level'
 
              for instance in label['Instances']:
-                 st.write(" Bounding box")
-                 st.write(" Top: " + str(instance['BoundingBox']['Top']))
-                 st.write(" Left: " + str(instance['BoundingBox']['Left']))
-                 st.write(" Width: " + str(instance['BoundingBox']['Width']))
-                 st.write(" Height: " + str(instance['BoundingBox']['Height']))
+                 #st.write(" Bounding box")
+                 #st.write(" Top: " + str(instance['BoundingBox']['Top']))
+                 #st.write(" Left: " + str(instance['BoundingBox']['Left']))
+                 #st.write(" Width: " + str(instance['BoundingBox']['Width']))
+                 #st.write(" Height: " + str(instance['BoundingBox']['Height']))
                  
                  box = instance['BoundingBox']
                  left = imgWidth * box['Left']
@@ -120,7 +121,7 @@ with st.container():
                     (left, top)
                  )
                  annotated_img.line(points, fill='#00c6d4', width=2)
-                 annotated_img.text((top, left), label['Name'], fill=('#00c6d4'))
+                 annotated_img.text((left, top), bb_label, fill=('#00c6d4'))
              st.markdown("""---""")  
          
          st.image(bb_image)
