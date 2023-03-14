@@ -123,12 +123,22 @@ with st.container():
          
          annotated_filename = 'annotated_'+str(file_with_al)
          st.write(annotated_filename)
+ 
+         # Save the image to an in-memory file
+         bb_image.save(in_mem_file, format=pil_image.format)
+         bb_image.seek(0)
+
+         # Upload image to s3
+         client_s3.upload_fileobj(
+             bb_image, # This is what i am trying to upload
+             bucket,
+             annotated_filename,
+             ExtraArgs={
+                 'ACL': 'public-read'
+             }
+         )
          
-         s3.upload_fileobj(bb_image, bucket, annotated_filename, ExtraArgs={'ContentType': "image/png"})
-         
-         st.title("Are you ready to save file details to Snowflake?")
-  
-        
+      
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator]
                                   , "BRIDGE_NAME": [bridge_name]
