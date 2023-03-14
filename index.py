@@ -66,13 +66,14 @@ with st.container():
       with st.spinner("Uploading image, analyzing the contents, and creating a metadata row about it..."):
 
          #st.write(uploaded_file)
-         file_to_put = getattr(uploaded_file, "name")     
+         file_to_put = getattr(uploaded_file, "name") 
+         file_to_put = file_to_put + '_Yay'
          st.write("File to be Processed: " + file_to_put + ".")
          #st.image(uploaded_file)
 
          s3 = boto3.client('s3', **st.secrets["s3"])
          bucket = 'uni-bridge-image-uploads'  
-         s3.upload_fileobj("whatever_i_want", bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
+         s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
 
          #after loading the file, we'll use it to analyze and draw
          s3_img_connection = boto3.resource('s3', **st.secrets["s3"])
