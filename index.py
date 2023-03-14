@@ -97,7 +97,7 @@ with st.container():
          for label in rek_response['Labels']:
              st.write("Item Identified: " + label['Name'])
              st.write("Percentage Confidence in Item Identification: " + str(label['Confidence']))
-             if label['Name'] = "Bridge": 
+             if label['Name'] is "Bridge": 
                   bridge_conf_level = label['Confidence']
              for instance in label['Instances']:
                  box = instance['BoundingBox']
