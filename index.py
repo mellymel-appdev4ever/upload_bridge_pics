@@ -73,7 +73,7 @@ with st.container():
 
          s3 = boto3.client('s3', **st.secrets["s3"])
          bucket = 'uni-bridge-image-uploads'  
-         s3.upload_fileobj(uploaded_file, bucket, file_to_put, ExtraArgs={'ContentType': "image/png"})
+         s3.upload_fileobj(uploaded_file, bucket, file_with_al, ExtraArgs={'ContentType': "image/png"})
 
          #after loading the file, we'll use it to analyze and draw
          s3_img_connection = boto3.resource('s3', **st.secrets["s3"])
