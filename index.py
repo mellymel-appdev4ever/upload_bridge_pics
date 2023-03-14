@@ -97,7 +97,7 @@ with st.container():
              st.write("Item Found: " + label['Name'])
              st.write("Confidence: " + str(label['Confidence']))
              
-             bb_label = label['Name']+":"+str(label['Confidence'])+"% Confidence Level"
+             bb_label = label['Name']+":"+left(str(label['Confidence']),5)+"% Confidence Level"
 
              for instance in label['Instances']:
                  box = instance['BoundingBox']
