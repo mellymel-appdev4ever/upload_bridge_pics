@@ -94,8 +94,8 @@ with st.container():
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
         
          for label in rek_response['Labels']:
-             st.write("Item Found: " + label['Name'])
-             st.write("Confidence: " + str(label['Confidence']))
+             st.write("Item Identified: " + label['Name'])
+             st.write("Percentage Confidence in Item Identification: " + str(label['Confidence']))
 
              for instance in label['Instances']:
                  box = instance['BoundingBox']
@@ -118,7 +118,6 @@ with st.container():
          
          st.image(bb_image)
          
-         #bb_image.save('..\..\with_lines.png')    
          
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
