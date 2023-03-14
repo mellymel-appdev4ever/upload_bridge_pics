@@ -83,7 +83,6 @@ with st.container():
          bb_image = Image.open(stream)
          imgWidth, imgHeight = bb_image.size
          annotated_img = ImageDraw.Draw(bb_image)
-         #st.write(imgWidth)
 
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
          rek_response = rek.detect_labels(
@@ -98,15 +97,9 @@ with st.container():
              st.write("Item Found: " + label['Name'])
              st.write("Confidence: " + str(label['Confidence']))
              
-             bb_label = label['Name']+':'+ str(label['Confidence']+'% Confidence Level'
+             bb_label = label['Name']+":"+str(label['Confidence']+"% Confidence Level"
 
              for instance in label['Instances']:
-                 #st.write(" Bounding box")
-                 #st.write(" Top: " + str(instance['BoundingBox']['Top']))
-                 #st.write(" Left: " + str(instance['BoundingBox']['Left']))
-                 #st.write(" Width: " + str(instance['BoundingBox']['Width']))
-                 #st.write(" Height: " + str(instance['BoundingBox']['Height']))
-                 
                  box = instance['BoundingBox']
                  left = imgWidth * box['Left']
                  top = imgHeight * box['Top']
