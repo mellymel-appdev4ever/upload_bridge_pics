@@ -124,8 +124,14 @@ with st.container():
          annotated_filename = 'annotated_'+str(file_with_al)
          st.write(annotated_filename)
  
+         # Open image
+         bb_image = Image.open(response.raw)
+
          # Save the image to an in-memory file
-         bb_image.save(in_mem_file, format=pil_image.format)
+         in_mem_file = io.BytesIO()
+ 
+         # Save the image to an in-memory file
+         bb_image.save(in_mem_file, format=bb_image.format)
          bb_image.seek(0)
 
          # Upload image to s3
