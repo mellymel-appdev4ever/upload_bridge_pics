@@ -119,31 +119,7 @@ with st.container():
                  annotated_img.text((left, top), bb_label, fill=('#ffffff'))
              st.markdown("""---""")  
          
-         st.image(bb_image)
-         
-         annotated_filename = 'annotated_'+str(file_with_al)
-         st.write(annotated_filename)
- 
-         # Open image into memory
-         save_image = Image.open(bb_image)
-
-         # Save the image to an in-memory file
-         in_mem_file = io.BytesIO()
- 
-         # Save the image to an in-memory file
-         save_image.save(in_mem_file, format=bb_image.format)
-         save_image.seek(0)
-
-         # Upload image to s3
-         client_s3.upload_fileobj(
-             save_image, 
-             bucket,
-             annotated_filename,
-             ExtraArgs={
-                 'ACL': 'public-read'
-             }
-         )
-         
+         st.image(bb_image)       
       
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator]
