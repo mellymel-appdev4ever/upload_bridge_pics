@@ -80,15 +80,16 @@ with st.container():
          s3_img_object = s3_img_connection.Object(bucket, file_with_al)
          s3_img_response = s3_img_object.get()
 
+         # this gets the file ready for annotation
          stream = io.BytesIO(s3_img_response['Body'].read())
          bb_image = Image.open(stream)
          imgWidth, imgHeight = bb_image.size
          annotated_img = ImageDraw.Draw(bb_image)
 
-         #run the AWS Computer vision routine that does computer vision stuff
+         # run the AWS Computer vision routine that does computer vision stuff
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
          rek_response = rek.detect_labels(
-               Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
+               Image={'S3Object':{'Bucket':bucket,'Name':file_with_al}},
                MaxLabels=10,
                Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Dog", "Person", "Boat", "Cloud"]}}
                )                                    
