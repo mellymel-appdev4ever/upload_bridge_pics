@@ -120,13 +120,12 @@ with st.container():
              st.markdown("""---""")  
          
          st.image(bb_image)
-        
+         
+         annotated_filename = 'annotated'+file_with_al
+         s3.upload_fileobj(bbimage, bucket, annotated_filename, ExtraArgs={'ContentType': "image/png"})
+         
          st.title("Are you ready to save file details to Snowflake?")
-         presign_url = s3_img_connection.generate_presigned_url('get_object',
-                                                Params={'Bucket': bucket,
-                                                        'Key': file_with_al},
-                                                ExpiresIn=2592000)
-         st.write(presign_url)
+  
         
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator]
