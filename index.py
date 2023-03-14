@@ -121,12 +121,12 @@ with st.container():
          
          st.image(bb_image)
         
-        st.title("Are you ready to save file details to Snowflake?")
-        presign_url = s3_client.generate_presigned_url('get_object',
-                                                    Params={'Bucket': bucket,
-                                                            'Key': file_with_al},
-                                                    ExpiresIn=2592000)
-        st.write(presign_url)
+         st.title("Are you ready to save file details to Snowflake?")
+         presign_url = s3_client.generate_presigned_url('get_object',
+                                                Params={'Bucket': bucket,
+                                                        'Key': file_with_al},
+                                                ExpiresIn=2592000)
+         st.write(presign_url)
         
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator]
