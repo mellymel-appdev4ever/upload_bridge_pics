@@ -121,7 +121,9 @@ with st.container():
          
          st.image(bb_image)
          
-         annotated_filename = 'annotated'+file_with_al
+         annotated_filename = 'annotated_'+str(file_with_al)
+         st.write(annotated_filename)
+         
          s3.upload_fileobj(bbimage, bucket, annotated_filename, ExtraArgs={'ContentType': "image/png"})
          
          st.title("Are you ready to save file details to Snowflake?")
