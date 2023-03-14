@@ -97,7 +97,7 @@ with st.container():
          for label in rek_response['Labels']:
              st.write("Item Identified: " + label['Name'])
              st.write("Percentage Confidence in Item Identification: " + str(label['Confidence']))
-
+             if label['Name'] = 'Bridge': bridge_conf_level = label['Confidence']
              for instance in label['Instances']:
                  box = instance['BoundingBox']
                  left = imgWidth * box['Left']
@@ -120,7 +120,13 @@ with st.container():
          st.image(bb_image)
         
          # Write image data in Snowflake table
-         to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
+         to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator]
+                                  , "BRIDGE_NAME": [bridge_name]
+                                  , "OG_FILE_NAME": [file_to_put]
+                                  , "COUNTRY_CODE": [country_code]
+                                  , "NEW_FILE_NAME": [file_with_al]
+                                  , "BRIDGE_CONF_LEVEL": [bridge_conf_level]
+                                 })
          session.write_pandas(to_sf_df, "UPLOADED_IMAGES")
          
          st.stop()
