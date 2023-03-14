@@ -67,7 +67,7 @@ with st.container():
 
          #st.write(uploaded_file)
          file_to_put = getattr(uploaded_file, "name") 
-         file_to_put = file_to_put + '_Yay'
+         file_with_al = account_locator+'_'+ file_to_put
          st.write("File to be Processed: " + file_to_put + ".")
          #st.image(uploaded_file)
 
@@ -118,8 +118,7 @@ with st.container():
              st.markdown("""---""")  
          
          st.image(bb_image)
-         
-         
+        
          # Write image data in Snowflake table
          to_sf_df = pd.DataFrame({"ACCOUNT_LOCATOR": [account_locator], "BRIDGE_NAME": [bridge_name], "OG_FILE_NAME": [file_to_put], "COUNTRY_CODE": [country_code]})
          session.write_pandas(to_sf_df, "UPLOADED_IMAGES")
