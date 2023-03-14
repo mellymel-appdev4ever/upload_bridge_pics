@@ -75,9 +75,9 @@ with st.container():
          bucket = 'uni-bridge-image-uploads'  
          s3.upload_fileobj(uploaded_file, bucket, file_with_al, ExtraArgs={'ContentType': "image/png"})
 
-         #after loading the file, we'll use it to analyze and draw
+         #after loading the file, we'll use it to analyze and add annotations to it
          s3_img_connection = boto3.resource('s3', **st.secrets["s3"])
-         s3_img_object = s3_img_connection.Object(bucket, file_to_put)
+         s3_img_object = s3_img_connection.Object(bucket, file_with_al)
          s3_img_response = s3_img_object.get()
 
          stream = io.BytesIO(s3_img_response['Body'].read())
@@ -85,6 +85,7 @@ with st.container():
          imgWidth, imgHeight = bb_image.size
          annotated_img = ImageDraw.Draw(bb_image)
 
+         #run the AWS Computer vision routine that does computer vision stuff
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
          rek_response = rek.detect_labels(
                Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
