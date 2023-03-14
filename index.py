@@ -9,10 +9,6 @@ from io import StringIO
 import base64
 from PIL import Image, ImageDraw, ImageFont
 
-#set font for annotation of images
-fontsize = 40
-bb_font = ImageFont.truetype("arial.ttf", fontsize)
-
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 uploaded_file = None
 # Set page title
@@ -124,7 +120,7 @@ with st.container():
                     (left, top)
                  )
                  annotated_img.line(points, fill='#00c6d4', width=2)
-                 annotated_img.text((top, left), name, fill=('#00c6d4'), font=bb_font)
+                 annotated_img.text((top, left), name, fill=('#00c6d4'))
              st.markdown("""---""")  
          
          st.image(bb_image)
