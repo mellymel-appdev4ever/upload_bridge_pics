@@ -88,7 +88,7 @@ with st.container():
          rek_response = rek.detect_labels(
                Image={'S3Object':{'Bucket':bucket,'Name':file_to_put}},
                MaxLabels=10,
-               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Dog", "Person", "Boat", "Vehicle", "Cloud"]}}
+               Settings={"GeneralLabels": {"LabelInclusionFilters":["Bridge", "Water", "Dog", "Person", "Boat", "Cloud"]}}
                )                                    
 
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
@@ -114,7 +114,7 @@ with st.container():
                     (left, top)
                  )
                  annotated_img.line(points, fill='#00c6d4', width=2)
-                 annotated_img.text((left, top), bb_label, fill=('#00c6d4'))
+                 annotated_img.text((left, top), bb_label, fill=('#ffffff'))
              st.markdown("""---""")  
          
          st.image(bb_image)
