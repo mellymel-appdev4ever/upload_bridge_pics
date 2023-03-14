@@ -97,7 +97,7 @@ with st.container():
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
          st.markdown("""---""")  
          for label in rek_response['Labels']:
-             st.write(label['Name']+": " + str(label['Confidence'])[:4]+"% Conf")
+             st.write(label['Name']+": " + str(label['Confidence'])[:4]+"% Confidence")
              if label['Name'] == 'Bridge': 
                   bridge_conf_level = label['Confidence']
              for instance in label['Instances']:
