@@ -68,7 +68,7 @@ with st.container():
          #st.write(uploaded_file)
          file_to_put = getattr(uploaded_file, "name") 
          file_with_al = account_locator+'_'+ file_to_put
-         st.write("File to be Processed: " + file_to_put + ".")
+         #st.write("File to be Processed: " + file_to_put + ".")
          #st.image(uploaded_file)
 
          s3 = boto3.client('s3', **st.secrets["s3"])
