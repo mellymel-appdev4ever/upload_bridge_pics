@@ -124,19 +124,19 @@ with st.container():
          annotated_filename = 'annotated_'+str(file_with_al)
          st.write(annotated_filename)
  
-         # Open image
-         bb_image = Image.open(response.raw)
+         # Open image into memory
+         save_image = Image.open(bb_image.raw)
 
          # Save the image to an in-memory file
          in_mem_file = io.BytesIO()
  
          # Save the image to an in-memory file
-         bb_image.save(in_mem_file, format=bb_image.format)
-         bb_image.seek(0)
+         save_image.save(in_mem_file, format=bb_image.format)
+         save_image.seek(0)
 
          # Upload image to s3
          client_s3.upload_fileobj(
-             bb_image, # This is what i am trying to upload
+             save_image, # This is what i am trying to upload
              bucket,
              annotated_filename,
              ExtraArgs={
