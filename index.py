@@ -122,7 +122,7 @@ with st.container():
          st.image(bb_image)
         
          st.title("Are you ready to save file details to Snowflake?")
-         presign_url = s3_client.generate_presigned_url('get_object',
+         presign_url = s3_img_connection.generate_presigned_url('get_object',
                                                 Params={'Bucket': bucket,
                                                         'Key': file_with_al},
                                                 ExpiresIn=2592000)
