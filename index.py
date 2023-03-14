@@ -125,7 +125,7 @@ with st.container():
          st.write(annotated_filename)
  
          # Open image into memory
-         save_image = Image.open(bb_image.raw)
+         save_image = Image.open(bb_image)
 
          # Save the image to an in-memory file
          in_mem_file = io.BytesIO()
@@ -136,7 +136,7 @@ with st.container():
 
          # Upload image to s3
          client_s3.upload_fileobj(
-             save_image, # This is what i am trying to upload
+             save_image, 
              bucket,
              annotated_filename,
              ExtraArgs={
