@@ -70,8 +70,6 @@ with st.container():
          #st.write(uploaded_file)
          file_to_put = getattr(uploaded_file, "name") 
          file_with_al = account_locator+'_'+ file_to_put
-         #st.write("File to be Processed: " + file_to_put + ".")
-         #st.image(uploaded_file)
 
          s3 = boto3.client('s3', **st.secrets["s3"])
          bucket = 'uni-bridge-image-uploads'  
@@ -81,14 +79,6 @@ with st.container():
          s3_img_connection = boto3.resource('s3', **st.secrets["s3"])
          s3_img_object = s3_img_connection.Object(bucket, file_with_al)
          s3_img_response = s3_img_object.get()
-
-         # this gets the file ready for annotation - can't branch to UDF before this point bc of IO
-         stream = io.BytesIO(s3_img_response['Body'].read())
-         bb_image = Image.open(stream)
-         imgWidth, imgHeight = bb_image.size
-         
-         # this line may need to wait til the stuff comes back from UDF
-         annotated_img = ImageDraw.Draw(bb_image)
 
          #maybe this is where we break and go over to Snowflake UDF
          #would need the access cred, boto, pillow
@@ -107,7 +97,15 @@ with st.container():
                )                                    
 
          st.write('The image you loaded has been examined for the presence of bridges and other items. The results are presented as percentage confidence that each object type appears in the image.')
-         st.markdown("""---""")  
+         st.markdown("""---""") 
+         
+         # this gets the file ready for annotation - can't branch to UDF before this point bc of IO
+         stream = io.BytesIO(s3_img_response['Body'].read())
+         bb_image = Image.open(stream)
+         imgWidth, imgHeight = bb_image.size
+         annotated_img = ImageDraw.Draw(bb_image)
+         
+         # this annotates the image using the rek results
          for label in rek_response['Labels']:
              st.write(label['Name']+": " + str(label['Confidence'])[:4]+"% Confidence")
              if label['Name'] == 'Bridge': 
