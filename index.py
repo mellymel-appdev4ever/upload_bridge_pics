@@ -9,6 +9,7 @@ from io import StringIO
 import base64
 from PIL import Image, ImageDraw, ImageFont
 
+# BUILD STREAMLIT FORM
 st.set_page_config(page_title='Image Uploader',  initial_sidebar_state="auto", menu_items=None)
 uploaded_file = None
 # Set page title
@@ -27,10 +28,11 @@ def create_session():
         session = st.session_state['snowpark_session']
     return session
     
-   
+ 
 # Open a Snowflake Snowpark Session
 session = create_session()
-   
+
+# Loads country codes from INSTRUCTOR Account - but table is familiar bc they also have built it. 
 country_codes_df = session.sql("select iso_country_name, alpha_code_3digit from intl_db.countries.int_stds_org_3661 order by iso_country_name;").collect()
 country_codes_df =  pd.DataFrame(country_codes_df)
 #st.write(country_codes_df)
@@ -60,7 +62,7 @@ with st.container():
   st.write('Please choose a JPG or PNG file to add to our bridge collection.')   
   uploaded_file = st.file_uploader("Choose an image file", accept_multiple_files=False, label_visibility='hidden')
 
-    
+ # LOAD IMAGE INTO INSTRUCTOR    
   if uploaded_file is not None:
    if st.button('Upload and Process File'):
       with st.spinner("Uploading image, analyzing the contents, and creating a metadata row about it..."):
@@ -75,19 +77,29 @@ with st.container():
          bucket = 'uni-bridge-image-uploads'  
          s3.upload_fileobj(uploaded_file, bucket, file_with_al, ExtraArgs={'ContentType': "image/png"})
 
-         #after loading the file, we'll use it to analyze and add annotations to it
+       
          s3_img_connection = boto3.resource('s3', **st.secrets["s3"])
          s3_img_object = s3_img_connection.Object(bucket, file_with_al)
          s3_img_response = s3_img_object.get()
 
-         # this gets the file ready for annotation
+         # this gets the file ready for annotation - can't branch to UDF before this point bc of IO
          stream = io.BytesIO(s3_img_response['Body'].read())
          bb_image = Image.open(stream)
          imgWidth, imgHeight = bb_image.size
+         
+         # this line may need to wait til the stuff comes back from UDF
          annotated_img = ImageDraw.Draw(bb_image)
 
+         #maybe this is where we break and go over to Snowflake UDF
+         #would need the access cred, boto, pillow
+         #after loading the file, we'll use it to analyze and add annotations to it
          # run the AWS Computer vision routine that does computer vision stuff
+         
+         # this is so problematic bc if we move the rek step to udf, they need rek creds
+         # I set up a policy which we could lock down a few days after the event, but how do we use this post-Summit?
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
+         
+         
          rek_response = rek.detect_labels(
                Image={'S3Object':{'Bucket':bucket,'Name':file_with_al}},
                MaxLabels=10,
