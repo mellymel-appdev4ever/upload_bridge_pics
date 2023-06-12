@@ -28,7 +28,6 @@ def create_session():
         session = st.session_state['snowpark_session']
     return session
     
- 
 # Open a Snowflake Snowpark Session
 session = create_session()
 
@@ -80,15 +79,8 @@ with st.container():
          s3_img_object = s3_img_connection.Object(bucket, file_with_al)
          s3_img_response = s3_img_object.get()
 
-         #maybe this is where we break and go over to Snowflake UDF
-         #would need the access cred, boto, pillow
-         #after loading the file, we'll use it to analyze and add annotations to it
-         # run the AWS Computer vision routine that does computer vision stuff
-         
-         # this is so problematic bc if we move the rek step to udf, they need rek creds
-         # I set up a policy which we could lock down a few days after the event, but how do we use this post-Summit?
+        
          rek = boto3.client('rekognition', **st.secrets["s3"], region_name='us-west-2')
-         
          
          rek_response = rek.detect_labels(
                Image={'S3Object':{'Bucket':bucket,'Name':file_with_al}},
